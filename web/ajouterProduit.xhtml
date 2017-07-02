@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html" 
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <title>Ajouter Produit</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+         <link rel="stylesheet" type="text/css" href="style.css"/>
+             
+    </head>
+    <body>
+        
+         <c:choose>
+        <c:when test="#{membre.connected()}">
+            <h1>Veuiller vous connecter</h1>
+            <a href =" login.xhtml" value ="login.xhtml"  style="text-align: center">Login</a>
+        </c:when>
+       
+           <c:otherwise>
+                  <h:form  >
+            <table name="menu" border="2" align="center">
+                <td> <h:commandButton action="listeStock.xhtml" value="Menu"></h:commandButton></td>
+                <td><h:commandButton action="member.xhtml" value="Profil"></h:commandButton></td>
+                <td><h:commandButton action="ajouterProduit.xhtml" value="Vendre"></h:commandButton></td>
+                <td><h5> Connected as #{membre.username} - Solde :#{membre.solde} $</h5></td>
+                <td><td><h:commandButton action="#{membre.wrong()}" value="Deconnection"></h:commandButton></td></td>
+              
+            </table>
+                </h:form>
+
+               
+               
+               
+               <br/><br/>
+         <h5  style="text-decoration: underline; text-align:  center ;">Proposer votre produit à vendre </h5>
+               
+               <br/><br/> 
+        
+        <f:view>
+            <h:form>
+                <div  align='center'>
+              <table  align='center' border='5' >
+                    <tr>
+                        <td>Nom du Produit </td>
+                        <td>Prix </td>
+                        <td>Date Limite </td>
+                        <td>Image (lien tinyurl) </td> 
+                        <td>Description </td>
+                        <td>Categorie</td>
+                    </tr>
+                    <tr>
+                        <td> <h:inputText value="#{produit.nomProduit}" ></h:inputText></td>
+                        
+                        <td>
+                       <h:inputText id="prix" value="#{produit.prix}" >
+                       <f:converter id="moneyConverter"  converterId = "moneyConverter" ></f:converter>
+                            
+                            </h:inputText>
+                          </td>
+                          <td> 
+                              <h:inputText id="date" value="#{produit.dateLimite}" >
+                               <f:validator id="dateValidator" validatorId="dateValidator" ></f:validator>
+                               </h:inputText>
+                                   
+                          </td>
+                              <td> <h:inputText value="#{produit.image}" ></h:inputText></td>
+                              <td>    <h:inputText value="#{produit.description}" ></h:inputText></td>
+                              <td>    <h:inputText value="#{produit.category}" ></h:inputText></td>
+                         </tr>
+                </table>
+                                           
+             </div>         
+                <div align="center">
+                <h:commandButton value="valider" action="#{produit.add}"/>
+                <h:message for = "date" style = "color:red" />
+                <h:message for ="prix" style = "color:red" />
+            </div>
+            </h:form>  
+        </f:view>
+            
+         <!--  --> 
+        
+            
+            
+           </c:otherwise>
+         </c:choose>
+    </body>
+</html>

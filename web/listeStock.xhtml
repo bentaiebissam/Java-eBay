@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html" 
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    <head>
+        
+        <title>Menu Principale</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+         <link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+   <h:body>
+       <c:choose>
+           <!-- Si il n'est pas connnecté -->
+        <c:when test="#{membre.connected()}">
+            <h1 style="text-align: center">Veuiller vous connecter</h1>
+               <a href =" login.xhtml" value ="login.xhtml"  style="text-align: center">Login</a>
+        </c:when>
+           
+           <!-- si c'est son premiere visite --> 
+           
+           <c:when test="#{membre.mcookie()}" >
+               <h2 style="text-align: center ;">Bienvenu à notre site pour la premiere fois</h2>
+               <br/><br/>
+               <h3 >Voici nos regles</h3>
+               <ul>
+                   <li>Vous ne pouvez vendre qu'un seul produit à la fois</li>
+                   <li>Les transactions peuvent prendre du temps</li>
+                   <li>On vous recommande de fournir un lien d'une image pour vos produits</li>
+               </ul>
+               <h:form>
+                   <h:commandButton action="#{membre.acc()}" value ='Accepter' style="text-align:  center " ></h:commandButton>
+               </h:form>
+           </c:when>
+           
+           <!-- Sinon -->
+           <c:otherwise>
+                  <h:form  >
+            <table name="menu" border="2" align="center">
+                <td> <h:commandButton action="listeStock.xhtml" value="Menu"></h:commandButton></td>
+                <td><h:commandButton action="member.xhtml" value="Profil"></h:commandButton></td>
+                <td><h:commandButton action="ajouterProduit.xhtml" value="Vendre"></h:commandButton></td>
+                <td><h5> Connected as #{membre.username} - Solde :#{membre.solde} $</h5></td>
+                <td><td><h:commandButton action="#{membre.wrong()}" value="Deconnection"></h:commandButton></td></td>
+              
+            </table>
+                      
+                      
+                </h:form>
+               
+               
+               <div align="center"   >
+	<h1 style="text-align: center">STOCK</h1>
+        <h3 style="text-align: center">Bienvenue #{membre.username} </h3>
+        <h2  style="text-align: center ; color: white">voici nos produits</h2>
+    
+     #{stock.maj()}  #{category.maj()}
+	<h:dataTable value="#{stock.categories}" var="categ"  border="2">
+            <h:column>
+            <a> Categorie : #{categ.nomCategory} </a>
+            </h:column>
+            <h:column>
+                <h:dataTable value ="#{categ.produits}" var="prod" border="2"  >
+                        <h:column>
+                    
+                       
+			<f:facet name="header">Produit </f:facet>
+                       
+                        #{prod.nomProduit}
+                  
+                         
+                                    </h:column>
+		<h:column>
+			<f:facet name="header">prix</f:facet>
+         #{prod.prix}
+      </h:column>
+                    <h:column>
+                        <h:graphicImage       value="#{prod.image}" height="52" width="52"></h:graphicImage>
+                    </h:column>
+		<h:column>
+			<f:facet name="header">Description</f:facet>
+         #{prod.description}
+       </h:column>
+                    <h:column>
+                        <h:form>
+                            <h:commandButton action="#{produit.redirect(prod.nomProduit)}" value="Consulter" ></h:commandButton>
+                        </h:form>
+                    </h:column>
+                        </h:dataTable>
+                </h:column> 
+               
+	
+        </h:dataTable>
+          
+       
+           
+        </div>
+           </c:otherwise>
+   </c:choose>
+</h:body>
+</html>

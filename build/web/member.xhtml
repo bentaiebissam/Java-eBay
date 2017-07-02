@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html" 
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    <head>
+        <title><h:outputText>#{membre.username}</h:outputText>'s Profile </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+    <body>
+         <c:choose>
+        <c:when test="#{membre.connected()}">
+            <h1>Veuiller vous connecter</h1>
+        <a href =" login.xhtml" value ="login.xhtml"  style="text-align: center">Login</a>
+        </c:when>
+       
+           <c:otherwise>
+                <h:form  >
+            <table name="menu" border="2" align="center">
+                <td> <h:commandButton action="listeStock.xhtml" value="Menu"></h:commandButton></td>
+                <td><h:commandButton action="member.xhtml" value="Profil"></h:commandButton></td>
+                <td><h:commandButton action="ajouterProduit.xhtml" value="Vendre"></h:commandButton></td>
+                <td><h5> Connected as #{membre.username} - Solde :#{membre.solde} $</h5></td>
+                <td><td><h:commandButton action="#{membre.wrong()}" value="Deconnection"></h:commandButton></td></td>
+              
+            </table>
+                </h:form>
+               <br/>
+        <div align="center">
+            <table>
+            <th>Your profile</th>
+            <tr><td>User</td><td>#{membre.username}</td></tr>
+            <tr><td>Pass</td><td>#{membre.password}</td></tr>
+            <tr><td>Solde</td><td>#{membre.solde}</td></tr>
+             </table>
+        
+        
+            <h:form>
+            <table>
+                <td> Changer votre solde :</td>  
+                <td><h:inputText value="#{membre.solde}" ></h:inputText></td>
+            </table>
+                <h:commandButton value="valider" action="#{membre.fund()}"></h:commandButton>
+
+            </h:form>
+       
+         <br/>
+        
+             <!--Afficher hisro a partit du cookie!-->
+             <h2 align="center">Votre Historique d'Activité: </h2>
+             #{membre.updateHistorique()}
+             <ul>
+             <h:dataTable value="#{membre.historique}" var="histo">
+                 <h:column>
+                     <li>  <h4 >#{histo}</h4></li>
+                 </h:column>
+             </h:dataTable>
+             </ul>
+         </div>
+           </c:otherwise>
+         </c:choose>
+    </body>
+</html>

@@ -1,0 +1,63 @@
+body { 
+background: url(bkground.jpg) fixed repeat; 
+font-family:Arial; 
+color :#1bf218; 
+font-size:22px; 
+} 
+a:visited, a:link, a:active { 
+font-family:Arial; 
+font-weight:normal; 
+color :#CC6600; 
+font-size:22px; 
+text-decoration :normal; 
+} 
+a:hover { 
+font-family:Arial; 
+font-weight:normal; 
+color :#FF66CC; 
+font-size:21px; 
+text-decoration :underline; 
+background :#3366CC; 
+} 
+h1 { 
+font-family:Arial; 
+text-align:left; 
+} 
+h2 { 
+font-family:Arial; 
+text-align:left; 
+} 
+h3 { 
+font-family:Arial; 
+text-align:left; 
+} 
+p { 
+font-family:Arial; 
+font-size:9px; 
+color :#330033; 
+text-align:left; 
+} 
+blockquote { 
+font-family:Arial; 
+font-size:9px; 
+color :#996666; 
+text-align:left; 
+} 
+a {
+    font-size:21px;
+}
+ul {
+    text-align: center;
+   
+}
+login {
+ 
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+
+}

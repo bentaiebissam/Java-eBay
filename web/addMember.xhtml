@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html" 
+       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Nouveau Membre</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+         <link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+    <body>
+        
+        <f:view>
+                  <h3  style="text-decoration: underline; text-align:  center ;">Inscrivez vous!</h3>
+                  <br/><br/><br/><br/>
+             <div style="top: 50% ; left : 50% ; text-align: center">
+                        <h:form>
+       <table border="2" align="center">
+                        
+                
+                <tr>
+                    <td>Pseudo</td>
+                    <td>pass</td>
+                </tr>
+                <tr>
+
+                <td> <h:inputText value="#{membre.username}" ></h:inputText></td>
+                <td><h:inputText value="#{membre.password}" ></h:inputText></td>
+                                           
+                      
+            
+               
+            
+                    </tr>
+           </table>
+                             <h:commandButton value="valider" action="#{membre.add()}"/> 
+                             </h:form>
+                 
+             </div>
+        </f:view>
+            
+         <!--  --> 
+        
+            
+            
+        
+    </body>
+</html>
