@@ -10,7 +10,7 @@ Users are allowed to:
 -Bet on a product
 -View the history of actions made on their account.
 
-The website utilies:
+The website utilizes:
 -Java JSTL
 -Managed Beans
 -Converters and Validators
